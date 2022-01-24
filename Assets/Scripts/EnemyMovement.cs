@@ -4,10 +4,20 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float speed = 4;
     private Transform _player; // Компонент находится на игроке
     private Transform _enemy;
+    /// <summary>
+    /// Свойство для передачи компонента Transform
+    /// </summary>
+    public Transform Player
+    {
+        set
+        {
+            _player = value;
+            Debug.Log(_player);
+        }
+    }
     void Start()
     {
         _enemy = GetComponent<Transform>();
-        _player = GameManager.PlayerTransform;
     }
     /// <summary>
     /// Двигает противника в сторону игрока

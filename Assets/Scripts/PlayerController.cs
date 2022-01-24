@@ -3,20 +3,19 @@ public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
     private float _vertical;
+    private int _hp = 5;
     private PlayerMovement _movement;
     private PlayerRotation _rotation;
     private PlayerCombat _combat;
     /// <summary> 
     /// Получаем значения компонентов в приватные поля
     /// </summary>
-    private void Awake()
+    private void Start()
     {
         _movement = GetComponent<PlayerMovement>();
         _rotation = GetComponent<PlayerRotation>();
         _combat = GetComponent<PlayerCombat>();
-        GameManager.PlayerTransform = GetComponent<Transform>();
     }
-
     /// <summary>
     /// Вызываем методы каждый кадр
     /// </summary>
@@ -37,5 +36,13 @@ public class PlayerController : MonoBehaviour
     {
         _vertical = Input.GetAxis("Vertical");
         _horizontal = Input.GetAxis("Horizontal");
+    }
+    public void Hit()
+    {
+        _hp--;
+        if (_hp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
