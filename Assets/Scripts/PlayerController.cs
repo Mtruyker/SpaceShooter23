@@ -6,15 +6,17 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement _movement;
     private PlayerRotation _rotation;
     private PlayerCombat _combat;
-    /// <summary>
+    /// <summary> 
     /// Получаем значения компонентов в приватные поля
     /// </summary>
-    private void Start()
+    private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
         _rotation = GetComponent<PlayerRotation>();
         _combat = GetComponent<PlayerCombat>();
+        GameManager.PlayerTransform = GetComponent<Transform>();
     }
+
     /// <summary>
     /// Вызываем методы каждый кадр
     /// </summary>
