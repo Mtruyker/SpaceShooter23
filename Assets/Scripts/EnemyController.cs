@@ -4,6 +4,7 @@ public class EnemyController : MonoBehaviour
     private int _hp = 3; 
     private EnemyMovement _movement;
     private GameManager _manager;
+    [SerializeField] private GameObject expolison;
     /// <summary>
     /// Получение координат игрока
     /// </summary>
@@ -26,7 +27,7 @@ public class EnemyController : MonoBehaviour
         _hp -= damage;
         if (_hp <= 0)
         {
-            Destroy(gameObject);
+            OnEnemyDestroy();
         }
     }
     /// <summary>
@@ -42,9 +43,11 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// Вызывается при уничтожении объекта
     /// </summary>
-    private void OnDestroy()
+    private void OnEnemyDestroy()
     {
+        Instantiate(expolison, transform.position, Quaternion.identity);
         _manager.OnEnemyDie();
+        Destroy(gameObject);
     }
     /// <summary>
     /// Вызывается при соприкосновении с игроком
@@ -55,7 +58,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().Hit();
-            Destroy(gameObject);
+            OnEnemyDestroy();
         }
     }
 }

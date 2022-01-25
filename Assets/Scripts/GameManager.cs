@@ -1,11 +1,15 @@
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
     private int _countOfEnemies = 0; // Число противников
     [SerializeField] private int enemiesPerWave = 4; // Число противников в волне
     [SerializeField] private GameObject enemy; 
     [SerializeField] private Transform player;
+    private int _score = 0;
+    public int Score
+    {
+        get => _score;
+    }
     private void Start()
     {
         SpawnEnemies();
@@ -17,6 +21,7 @@ public class GameManager : MonoBehaviour
     public void OnEnemyDie()
     {
         _countOfEnemies--;
+        _score++;
         if (_countOfEnemies <= 0)
         {
             SpawnEnemies();
